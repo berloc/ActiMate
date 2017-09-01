@@ -31,6 +31,6 @@ matrix:
           - npm install karma --save-dev
           - npm install
           - ng build
-      script: cd frontend && npm test
+      script: cd frontend && ng test --watch false
     - notifications:
         email: false
