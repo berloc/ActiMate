@@ -31,6 +31,6 @@ matrix:
           - npm install karma --save-dev
           - npm install
           - ng build
-      script: cd frontend && karma start config/karma.conf.js --single-run
+      script: cd frontend && karma start karma.conf.js --single-run
     - notifications:
         email: false
