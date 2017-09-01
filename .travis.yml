@@ -14,7 +14,9 @@ matrix:
       os: linux
 
     - language: node_js
-      sudo: false
+      sudo: required
+      dist: trusty
+      os: linux
       addons:
         apt:
           sources:
@@ -34,5 +36,5 @@ matrix:
           - ng build
       script: cd frontend && karma start karma.conf.js --single-run
 
-    - notifications:
+    notifications:
         email: false
