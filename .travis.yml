@@ -29,6 +29,7 @@ matrix:
         before_script:
           - npm install -g angular-cli
           - npm install karma --save-dev
+          - npm install ng-common
           - npm install
           - ng build
       script: cd frontend && ng test --watch false
