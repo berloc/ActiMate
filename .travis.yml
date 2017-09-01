@@ -36,5 +36,5 @@ matrix:
           - ng build
       script: cd frontend && karma start karma.conf.js --single-run
 
-    notifications:
+    - notifications:
         email: false
