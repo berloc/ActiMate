@@ -26,4 +26,5 @@ nbdist/
 application-dev.properties
 .mvn
 mvnw.*
+mvnw
 *.log
