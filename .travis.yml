@@ -32,7 +32,7 @@ matrix:
           - npm install -g @angular/cli
           - cd frontend && npm install
         #   - cd frontend && ng build
-      script: cd frontend && ng test
+      script: ng test
 
     - notifications:
         email: false
