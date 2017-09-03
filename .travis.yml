@@ -29,11 +29,8 @@ matrix:
           - sh -e /etc/init.d/xvfb start
       before_script:
           - npm install -g angular-cli
-          - npm install -g karma-cli
-          - npm install -g karma
-          - npm install
           - ng build
-      script: cd frontend && karma start karma.conf.js --single-run
+      script: cd frontend && ng test
 
     - notifications:
         email: false
