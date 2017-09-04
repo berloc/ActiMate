@@ -17,15 +17,17 @@ public class DataLoader {
     InterestRepository interestRepository;
 
     private List<String> interestList = new ArrayList<String>() {{
-        add("waterSports");
-        add("winterSports");
-        add("outdoorSports");
+        add("climbing");
+        add("tennis");
+        add("water sports");
+        add("winter sports");
+        add("outdoor sports");
         add("cultural");
-        add("outdoorActivity");
-        add("ballGames");
-        add("boardGames");
+        add("outdoor activity");
+        add("ball games");
+        add("board games");
         add("eSports");
-        add("indoorSports");
+        add("indoor sports");
         add("other");
     }};
 
