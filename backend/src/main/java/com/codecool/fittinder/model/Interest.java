@@ -19,4 +19,9 @@ public class Interest {
     private String name;
     @ManyToMany(mappedBy = "interestList")
     private List<Profile>profileList;
+
+
+    public Interest(String name) {
+        this.name = name;
+    }
 }
