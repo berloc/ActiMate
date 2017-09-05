@@ -33,5 +33,33 @@ public class UserControllerTest extends TestConfig {
                 userService.getUserByEmail("user@user.com").getEmail());
     }
 
+    @Test
+    public void registrationTestNotValidEmail() throws Exception {
+        mockMvc.perform(post(host + port + regUrl)
+                .content("{\"email\":\"useruser.com\", \"password\":\"12345678\"}")
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON));
+    }
+
+    @Test
+    public void registrationTestNotValidPassword() throws Exception {
+        mockMvc.perform(post(host + port + regUrl)
+                .content("{\"email\":\"user@user.com\", \"password\":\"12345\"}")
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON));
+    }
+
+    @Test
+    public void registrationTestEmailInTheDatabase() throws Exception {
+        mockMvc.perform(post(host+port+regUrl)
+                .content("{\"email\":\"user@user.com\", \"password\":\"123456789\"}")
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON));
+
+        mockMvc.perform(post(host+port+regUrl)
+                .content("{\"email\":\"user@user.com\", \"password\":\"123456789\"}")
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON));
+    }
 
 }
