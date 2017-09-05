@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
@@ -15,7 +16,9 @@ public class Profile {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @OneToOne(mappedBy = "profile")
+    @OneToOne
+    @JoinColumn(name = "user_id", unique = true)
+    @NotNull
     private User user;
 
     @JsonIgnore

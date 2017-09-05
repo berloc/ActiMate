@@ -10,7 +10,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.util.Date;
 
-@Entity(name = "´user´")
+@Entity(name = "users")
 @Getter @Setter
 @AllArgsConstructor @NoArgsConstructor
 public class User {
@@ -21,11 +21,12 @@ public class User {
     private String email;
     @JsonIgnore
     private String password;
-    @OneToOne
-    @JoinColumn
-    private Profile profile;
-    @Enumerated(value = EnumType.STRING)
-    private Enum<Role> role;
+    @Enumerated(EnumType.STRING)
+    private Role role;
     private Date regDate;
 
+    public User(String email, String password) {
+        this.email = email;
+        this.password = password;
+    }
 }
