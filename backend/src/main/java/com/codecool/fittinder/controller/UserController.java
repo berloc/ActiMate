@@ -4,6 +4,7 @@ import com.codecool.fittinder.dto.UserDto;
 import com.codecool.fittinder.exception.EmailIsInTheDatabaseException;
 import com.codecool.fittinder.model.Profile;
 import com.codecool.fittinder.model.User;
+import com.codecool.fittinder.model.enums.Role;
 import com.codecool.fittinder.repository.ProfileRepository;
 import com.codecool.fittinder.repository.UserRepository;
 import com.codecool.fittinder.security.UserServiceImpl;
@@ -54,7 +55,7 @@ public class UserController {
         JSONObject response = new JSONObject().put(status,"fail");
         User user = converter.convertToUser(userDto);
         if (userRepository.findByEmail(user.getEmail()) == null) {
-            userService.createUser(user);
+            userService.createUser(user, Role.USER);
             Profile profile = new Profile(user);
             profileRepository.save(profile);
             logger.info("Save profile into the {} table", profile.getClass().getSimpleName());

@@ -21,9 +21,9 @@ public class UserServiceImpl implements UserService {
     UserRepository userRepository;
 
     @Override
-    public void createUser(User user) {
+    public void createUser(User user, Role role) {
         user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
-        user.setRole(Role.USER);
+        user.setRole(role);
         user.setRegDate(Calendar.getInstance().getTime());
         userRepository.save(user);
         logger.info("User with {} email saved into the database", user.getEmail());
