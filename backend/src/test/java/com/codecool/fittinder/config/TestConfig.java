@@ -24,6 +24,9 @@ public abstract class TestConfig  {
     WebApplicationContext webApplicationContext;
 
     protected MockMvc mockMvc;
+    protected String host = "http://localhost:";
+    protected String port = "8080";
+
 
     @Before
     public void initMockMvc() {
