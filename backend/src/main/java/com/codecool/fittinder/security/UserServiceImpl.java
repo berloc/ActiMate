@@ -1,9 +1,7 @@
 package com.codecool.fittinder.security;
 
-import com.codecool.fittinder.model.Profile;
 import com.codecool.fittinder.model.User;
 import com.codecool.fittinder.model.enums.Role;
-import com.codecool.fittinder.repository.ProfileRepository;
 import com.codecool.fittinder.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,23 +20,17 @@ public class UserServiceImpl implements UserService {
     @Autowired
     UserRepository userRepository;
 
-    @Autowired
-    ProfileRepository profileRepository;
-
     @Override
-    public void createUser(User user, Role role) {
+    public void createUser(User user) {
         user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
-        user.setRole(role);
+        user.setRole(Role.USER);
         user.setRegDate(Calendar.getInstance().getTime());
-        Profile profile = new Profile(user);
-        profileRepository.save(profile);
-        logger.info("Save profile into the {} table", profile.getClass().getSimpleName());
-
+        userRepository.save(user);
         logger.info("User with {} email saved into the database", user.getEmail());
     }
 
     @Override
-    public User findByEmail(String email) {
+    public User getUserByEmail(String email) {
         return userRepository.findByEmail(email);
     }
 }
