@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 import javax.mail.MessagingException;
@@ -15,11 +16,10 @@ public class EmailServiceImpl implements EmailService {
 
     private static final Logger logger = LoggerFactory.getLogger(EmailServiceImpl.class);
 
-
     @Autowired
     public JavaMailSender emailSender;
 
-    @Override
+    @Async
     public void sendMessage(String to, String subject, String text) throws MessagingException {
 
         MimeMessage mimeMessage = emailSender.createMimeMessage();
@@ -29,5 +29,6 @@ public class EmailServiceImpl implements EmailService {
         helper.setSubject(subject);
         emailSender.send(mimeMessage);
         logger.info("{} email has been sent to {}", subject, to);
+
     }
 }

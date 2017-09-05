@@ -62,4 +62,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public JavaMailSender javaMailSender() {
         return new JavaMailSenderImpl();
     }
+
+
 }
