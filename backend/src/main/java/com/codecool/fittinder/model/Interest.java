@@ -1,5 +1,6 @@
 package com.codecool.fittinder.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,8 +16,10 @@ public class Interest {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @JsonIgnore
     private Integer id;
     private String name;
+    @JsonIgnore
     @ManyToMany(mappedBy = "interestList")
     private List<Profile>profileList;
 
