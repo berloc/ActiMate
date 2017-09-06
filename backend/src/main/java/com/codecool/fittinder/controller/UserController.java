@@ -5,17 +5,12 @@ import com.codecool.fittinder.exception.EmailIsInTheDatabaseException;
 import com.codecool.fittinder.model.Profile;
 import com.codecool.fittinder.model.User;
 import com.codecool.fittinder.model.enums.Role;
-import com.codecool.fittinder.repository.ProfileRepository;
-import com.codecool.fittinder.repository.UserRepository;
-import com.codecool.fittinder.security.UserServiceImpl;
 import com.codecool.fittinder.service.DtoConverter;
-import com.codecool.fittinder.service.email.EmailServiceImpl;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,28 +20,13 @@ import javax.validation.Valid;
 
 @CrossOrigin
 @RestController
-public class UserController {
+public class UserController extends AbstractController{
 
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
     private String status = "status";
 
     @Autowired
-    private UserServiceImpl userService;
-
-    @Autowired
-    private EmailServiceImpl emailService;
-
-    @Autowired
     private DtoConverter converter;
-
-    @Autowired
-    public SimpleMailMessage template;
-
-    @Autowired
-    ProfileRepository profileRepository;
-
-    @Autowired
-    UserRepository userRepository;
 
     @PostMapping(value = "/registration")
     @ResponseBody
@@ -54,7 +34,7 @@ public class UserController {
         logger.debug("{} route called with method: {}", request.getRequestURI(), request.getMethod());
         JSONObject response = new JSONObject().put(status,"fail");
         User user = converter.convertToUser(userDto);
-        if (userRepository.findByEmail(user.getEmail()) == null) {
+        if (userService.getUserByEmail(user.getEmail()) == null) {
             userService.createUser(user, Role.USER);
             Profile profile = new Profile(user);
             profileRepository.save(profile);
