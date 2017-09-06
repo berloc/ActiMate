@@ -62,4 +62,9 @@ public class UserControllerTest extends TestConfig {
                 .accept(MediaType.APPLICATION_JSON));
     }
 
+    @Test
+    public void UnRegisteredUserNotFound() throws Exception {
+        assertEquals(null, userService.getUserByEmail("user@user.com"));
+    }
+
 }
