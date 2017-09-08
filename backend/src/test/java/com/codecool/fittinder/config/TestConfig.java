@@ -1,7 +1,9 @@
 package com.codecool.fittinder.config;
 
+import com.codecool.fittinder.security.UserService;
 import org.junit.Before;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.web.FilterChainProxy;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -23,10 +25,12 @@ public abstract class TestConfig  {
     @Resource
     WebApplicationContext webApplicationContext;
 
+    @Autowired
+    protected UserService userService;
+
     protected MockMvc mockMvc;
     protected String host = "http://localhost:";
     protected String port = "8080";
-
 
     @Before
     public void initMockMvc() {
