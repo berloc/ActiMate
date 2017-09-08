@@ -1,10 +1,8 @@
 package com.codecool.fittinder.controller;
 
 import com.codecool.fittinder.config.TestConfig;
-import com.codecool.fittinder.security.UserService;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 
 import static org.junit.Assert.assertEquals;
@@ -14,23 +12,20 @@ public class UserControllerTest extends TestConfig {
 
     private String regUrl = "/registration";
 
-    @Autowired
-    private UserService userService;
-
     @Before
     public void setup() {
         initMockMvc();
     }
 
     @Test
-    public void registrationTestFindRegisteredUsers() throws Exception {
+    public void registrationFindRegisteredUsersTest() throws Exception {
         mockMvc.perform(post(host + port + regUrl)
                 .content("{\"email\":\"user@user.com\", \"password\":\"12345678\"}")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON));
 
         assertEquals("user@user.com",
-                userService.getUserByEmail("user@user.com").getEmail());
+                userService.findByEmail("user@user.com").getEmail());
     }
 
     @Test
@@ -42,7 +37,7 @@ public class UserControllerTest extends TestConfig {
     }
 
     @Test
-    public void registrationTestNotValidPassword() throws Exception {
+    public void registrationNotValidPasswordTest() throws Exception {
         mockMvc.perform(post(host + port + regUrl)
                 .content("{\"email\":\"user@user.com\", \"password\":\"12345\"}")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -50,7 +45,7 @@ public class UserControllerTest extends TestConfig {
     }
 
     @Test
-    public void registrationTestEmailInTheDatabase() throws Exception {
+    public void registrationEmailInTheDatabaseTest() throws Exception {
         mockMvc.perform(post(host+port+regUrl)
                 .content("{\"email\":\"user@user.com\", \"password\":\"123456789\"}")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -64,7 +59,7 @@ public class UserControllerTest extends TestConfig {
 
     @Test
     public void UnRegisteredUserNotFound() throws Exception {
-        assertEquals(null, userService.getUserByEmail("user@user.com"));
+        assertEquals(null, userService.findByEmail("user@user.com"));
     }
 
 }

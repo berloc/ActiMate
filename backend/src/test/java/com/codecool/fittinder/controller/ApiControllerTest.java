@@ -17,7 +17,7 @@ public class ApiControllerTest extends TestConfig {
     }
 
     @Test
-    public void statusTestReturnJSON() throws Exception {
+    public void statusReturnJSONTest() throws Exception {
         mockMvc.perform(get("/api/status"))
                 .andExpect(content().string(containsString("\"status\":\"server is running\"")));
     }
