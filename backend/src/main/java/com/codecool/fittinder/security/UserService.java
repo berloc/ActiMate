@@ -7,5 +7,5 @@ public interface UserService {
 
     void createUser(User user, Role role);
 
-    User getUserByEmail(String email);
+    User findByEmail(String email);
 }

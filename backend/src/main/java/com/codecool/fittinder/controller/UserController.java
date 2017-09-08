@@ -34,12 +34,12 @@ public class UserController extends AbstractController{
         logger.debug("{} route called with method: {}", request.getRequestURI(), request.getMethod());
         JSONObject response = new JSONObject().put(status,"fail");
         User user = converter.convertToUser(userDto);
-        if (userService.getUserByEmail(user.getEmail()) == null) {
+        if (userService.findByEmail(user.getEmail()) == null) {
             userService.createUser(user, Role.USER);
             Profile profile = new Profile(user);
             profileRepository.save(profile);
             logger.info("Save profile into the {} table", profile.getClass().getSimpleName());
-            emailService.sendMessage(user.getEmail(), "registration", template.getText());
+//            emailService.sendMessage(user.getEmail(), "registration", template.getText());
             response.put(status,"success");
         } else {
             logger.debug("{} is already in the db", user.getEmail());
