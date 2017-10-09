@@ -20,7 +20,6 @@ public class User {
     private String username;
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
-    @Enumerated(value = EnumType.STRING)
     private Date regDate;
 
     public User(String email, String password) {
