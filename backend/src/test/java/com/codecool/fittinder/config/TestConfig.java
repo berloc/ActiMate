@@ -1,6 +1,5 @@
 package com.codecool.fittinder.config;
 
-import com.codecool.fittinder.model.User;
 import com.codecool.fittinder.service.security.UserService;
 import org.junit.Before;
 import org.junit.runner.RunWith;
@@ -36,7 +35,6 @@ public abstract class TestConfig  {
     protected String loginUrl = "/login";
     protected String createProfileUrl = "/u/event/create";
 
-    protected User mockUser = new User("user@user.com", "password");
 
     @Before
     public void initMockMvc() {
