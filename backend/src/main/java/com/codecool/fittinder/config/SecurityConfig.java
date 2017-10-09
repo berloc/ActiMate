@@ -1,7 +1,7 @@
 package com.codecool.fittinder.config;
 
-import com.codecool.fittinder.security.JWTAuthenticationFilter;
-import com.codecool.fittinder.security.JWTAuthorizationFilter;
+import com.codecool.fittinder.service.security.JWTAuthenticationFilter;
+import com.codecool.fittinder.service.security.JWTAuthorizationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
