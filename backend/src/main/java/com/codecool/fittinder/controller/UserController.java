@@ -1,6 +1,6 @@
 package com.codecool.fittinder.controller;
 
-import com.codecool.fittinder.dto.UserDto;
+import com.codecool.fittinder.model.dto.UserDto;
 import com.codecool.fittinder.exception.EmailIsInTheDatabaseException;
 import com.codecool.fittinder.model.Profile;
 import com.codecool.fittinder.model.User;
