@@ -1,10 +1,11 @@
 package com.codecool.fittinder.config;
 
+import com.codecool.fittinder.security.JWTAuthenticationFilter;
+import com.codecool.fittinder.security.JWTAuthorizationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.annotation.Order;
+import org.springframework.http.HttpMethod;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
@@ -14,7 +15,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -23,41 +26,36 @@ import java.util.Scanner;
 
 @EnableWebSecurity
 @Configuration
-@Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
-
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
 
     @Autowired
     private UserDetailsService userDetailsService;
 
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
     @Override
     public void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable().authorizeRequests()
-            .antMatchers("/api/**", "/registration").permitAll()
-            .and()
-            .formLogin().loginPage("/login").permitAll()
-            .and()
-            .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-            .logoutSuccessUrl("/").deleteCookies("JSESSIONID")
-            .permitAll()
-            .and()
-        ;
+        http.cors().and().csrf().disable().authorizeRequests()
+                .antMatchers("/").permitAll()
+                .antMatchers(HttpMethod.POST, "/registration").permitAll()
+                .anyRequest().authenticated()
+                .and()
+                .addFilter(new JWTAuthenticationFilter(authenticationManager()))
+                .addFilter(new JWTAuthorizationFilter(authenticationManager()));
     }
 
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
+    @Override
+    public void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder);
     }
 
     @Bean
-    public SimpleMailMessage templateSimpleMessage() throws FileNotFoundException {
-        String path = Paths.get("").toAbsolutePath().normalize().toString();
-        SimpleMailMessage message = new SimpleMailMessage();
-        Scanner scanner = new Scanner(new File(path + "/src/main/resources/templates/welcome_email.html"));
-        String text = scanner.useDelimiter("\\A").next();
-        scanner.close();
-        message.setText(text);
-        return message;
+    CorsConfigurationSource corsConfigurationSource() {
+        final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
+        return source;
     }
 
     @Bean
@@ -70,5 +68,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new JavaMailSenderImpl();
     }
 
-
+    @Bean
+    public SimpleMailMessage templateSimpleMessage() throws FileNotFoundException {
+        String path = Paths.get("").toAbsolutePath().normalize().toString();
+        SimpleMailMessage message = new SimpleMailMessage();
+        Scanner scanner = new Scanner(new File(path + "/src/main/resources/templates/welcome_email.html"));
+        String text = scanner.useDelimiter("\\A").next();
+        scanner.close();
+        message.setText(text);
+        return message;
+    }
 }

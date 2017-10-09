@@ -13,7 +13,7 @@ public class UserDto {
 
     @Email
     @NotNull
-    private String email;
+    private String username;
     @NotNull
     @Size(min = 8)
     private String password;
