@@ -1,4 +1,4 @@
-package com.codecool.fittinder.security;
+package com.codecool.fittinder.service.security;
 
 class SecurityConstants {
 

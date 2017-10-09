@@ -1,4 +1,4 @@
-package com.codecool.fittinder.security;
+package com.codecool.fittinder.service.security;
 
 import io.jsonwebtoken.Jwts;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import static com.codecool.fittinder.security.SecurityConstants.*;
+import static com.codecool.fittinder.service.security.SecurityConstants.*;
 
 
 public class JWTAuthorizationFilter extends BasicAuthenticationFilter {

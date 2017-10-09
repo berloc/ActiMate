@@ -1,4 +1,4 @@
-package com.codecool.fittinder.security;
+package com.codecool.fittinder.service.security;
 
 import com.codecool.fittinder.model.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 
-import static com.codecool.fittinder.security.SecurityConstants.*;
+import static com.codecool.fittinder.service.security.SecurityConstants.*;
 
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 

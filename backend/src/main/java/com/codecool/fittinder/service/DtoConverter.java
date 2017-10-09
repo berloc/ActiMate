@@ -1,12 +1,12 @@
 package com.codecool.fittinder.service;
 
-import com.codecool.fittinder.dto.EventDto;
-import com.codecool.fittinder.dto.UserDto;
+import com.codecool.fittinder.model.dto.EventDto;
+import com.codecool.fittinder.model.dto.UserDto;
 import com.codecool.fittinder.model.Event;
 import com.codecool.fittinder.model.User;
 import com.codecool.fittinder.model.enums.Status;
 import com.codecool.fittinder.repository.InterestRepository;
-import com.codecool.fittinder.security.UserService;
+import com.codecool.fittinder.service.security.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

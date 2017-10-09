@@ -1,4 +1,4 @@
-package com.codecool.fittinder.dto;
+package com.codecool.fittinder.model.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
