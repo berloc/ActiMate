@@ -1,6 +1,7 @@
 package com.codecool.fittinder.config;
 
-import com.codecool.fittinder.security.UserService;
+import com.codecool.fittinder.model.User;
+import com.codecool.fittinder.service.security.UserService;
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,8 +30,13 @@ public abstract class TestConfig  {
     protected UserService userService;
 
     protected MockMvc mockMvc;
-    protected String host = "http://localhost:";
-    protected String port = "8080";
+    protected String host = "http://localhost";
+    protected String port = ":8080";
+    protected String regUrl = "/registration";
+    protected String loginUrl = "/login";
+    protected String createProfileUrl = "/u/event/create";
+
+    protected User mockUser = new User("user@user.com", "password");
 
     @Before
     public void initMockMvc() {

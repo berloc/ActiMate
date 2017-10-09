@@ -10,8 +10,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 
 public class UserControllerTest extends TestConfig {
 
-    private String regUrl = "/registration";
-
     @Before
     public void setup() {
         initMockMvc();
@@ -20,18 +18,18 @@ public class UserControllerTest extends TestConfig {
     @Test
     public void registrationFindRegisteredUsersTest() throws Exception {
         mockMvc.perform(post(host + port + regUrl)
-                .content("{\"email\":\"user@user.com\", \"password\":\"12345678\"}")
+                .content("{\"username\":\"user@user.com\", \"password\":\"12345678\"}")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON));
 
         assertEquals("user@user.com",
-                userService.findByEmail("user@user.com").getEmail());
+                userService.findByUsername("user@user.com").getUsername());
     }
 
     @Test
     public void registrationTestNotValidEmail() throws Exception {
         mockMvc.perform(post(host + port + regUrl)
-                .content("{\"email\":\"useruser.com\", \"password\":\"12345678\"}")
+                .content("{\"username\":\"useruser.com\", \"password\":\"12345678\"}")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON));
     }
@@ -39,7 +37,7 @@ public class UserControllerTest extends TestConfig {
     @Test
     public void registrationNotValidPasswordTest() throws Exception {
         mockMvc.perform(post(host + port + regUrl)
-                .content("{\"email\":\"user@user.com\", \"password\":\"12345\"}")
+                .content("{\"username\":\"user@user.com\", \"password\":\"12345\"}")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON));
     }
@@ -47,19 +45,19 @@ public class UserControllerTest extends TestConfig {
     @Test
     public void registrationEmailInTheDatabaseTest() throws Exception {
         mockMvc.perform(post(host+port+regUrl)
-                .content("{\"email\":\"user@user.com\", \"password\":\"123456789\"}")
+                .content("{\"username\":\"user@user.com\", \"password\":\"123456789\"}")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON));
 
         mockMvc.perform(post(host+port+regUrl)
-                .content("{\"email\":\"user@user.com\", \"password\":\"123456789\"}")
+                .content("{\"username\":\"user@user.com\", \"password\":\"123456789\"}")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON));
     }
 
     @Test
     public void UnRegisteredUserNotFound() throws Exception {
-        assertEquals(null, userService.findByEmail("user@user.com"));
+        assertEquals(null, userService.findByUsername("user@user.com"));
     }
 
 }
