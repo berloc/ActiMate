@@ -15,7 +15,7 @@ import java.security.Principal;
 
 abstract class AbstractController {
 
-    final String debugLogMes = "{} is called with method: {}";
+    final static String DEBUG_LOG_MES = "{} is called with method: {}";
 
     @Autowired
     UserService userService;

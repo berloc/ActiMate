@@ -24,7 +24,7 @@ public class EventController extends AbstractController {
     @PostMapping(value = "/event/create")
     @ResponseBody
     public String createEvent(@RequestBody @Valid EventDto eventDto, HttpServletRequest request, Principal principal) throws JSONException {
-        logger.debug(debugLogMes, request.getRequestURI(), request.getMethod());
+        logger.debug(DEBUG_LOG_MES, request.getRequestURI(), request.getMethod());
         JSONObject response = new JSONObject().put("status", "fail");
         Event event = converter.convertToEvent(eventDto, principal);
         eventRepository.save(event);
@@ -34,7 +34,7 @@ public class EventController extends AbstractController {
     @GetMapping(value = "/events")
     @ResponseBody
     public List<Event> getAllEvents(HttpServletRequest request, Principal principal) {
-        logger.debug(debugLogMes, request.getRequestURI(), request.getMethod());
+        logger.debug(DEBUG_LOG_MES, request.getRequestURI(), request.getMethod());
         logger.info("All events of user: {} have been collected", principal.getName());
         return eventRepository.findByUserOrderByStartDate(getCurrentUser(principal));
     }
@@ -42,7 +42,7 @@ public class EventController extends AbstractController {
     @GetMapping(value = "/event/{id}")
     @ResponseBody
     public Event getEvent(@PathVariable(value = "id") Integer id, HttpServletRequest request) {
-        logger.debug(debugLogMes, request.getRequestURI(), request.getMethod());
+        logger.debug(DEBUG_LOG_MES, request.getRequestURI(), request.getMethod());
         return eventRepository.findById(id);
     }
 
@@ -51,7 +51,7 @@ public class EventController extends AbstractController {
     @ResponseBody
     public String updateEvent(@PathVariable(value = "id") Integer id, HttpServletRequest request, Principal principal,
                               @RequestBody EventDto eventDto) throws JSONException {
-        logger.debug(debugLogMes, request.getRequestURI(), request.getMethod());
+        logger.debug(DEBUG_LOG_MES, request.getRequestURI(), request.getMethod());
         Event currentEvent = converter.convertToEvent(eventDto, principal);
         currentEvent.setId(id);
         eventRepository.save(currentEvent);

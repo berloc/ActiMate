@@ -22,27 +22,27 @@ public class ApiController extends AbstractController {
 
     @GetMapping(value = "/status")
     public String status(HttpServletRequest request) throws JSONException {
-        logger.debug(debugLogMes, request.getRequestURI(), request.getMethod());
+        logger.debug(DEBUG_LOG_MES, request.getRequestURI(), request.getMethod());
         JSONObject status = new JSONObject().put("status","server is running");
         return status.toString();
     }
 
     @GetMapping(value = "/interest")
     public List<Interest> getInterest(HttpServletRequest request) {
-        logger.debug(debugLogMes, request.getRequestURI(), request.getMethod());
+        logger.debug(DEBUG_LOG_MES, request.getRequestURI(), request.getMethod());
         return interestRepository.findAll();
     }
 
     @GetMapping(value = "/events")
     public List<Event> getEvents(HttpServletRequest request) {
-        logger.debug(debugLogMes, request.getRequestURI(), request.getMethod());
+        logger.debug(DEBUG_LOG_MES, request.getRequestURI(), request.getMethod());
         return eventRepository.findAll();
     }
 
     @GetMapping(value = "/me")
     @ResponseBody
     public User getMe(HttpServletRequest request, Principal principal) {
-        logger.debug(debugLogMes, request.getRequestURI(), request.getMethod());
+        logger.debug(DEBUG_LOG_MES, request.getRequestURI(), request.getMethod());
         return userService.findByUsername(getCurrentUser(principal).getUsername());
     }
 }

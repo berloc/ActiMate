@@ -34,7 +34,7 @@ public class UserController extends AbstractController {
     @PostMapping(value = "/registration")
     @ResponseBody
     public String registration(@RequestBody @Valid UserDto userDto, HttpServletRequest request) throws JSONException, MessagingException, EmailIsInTheDatabaseException {
-        logger.debug(debugLogMes, request.getRequestURI(), request.getMethod());
+        logger.debug(DEBUG_LOG_MES, request.getRequestURI(), request.getMethod());
         JSONObject response = new JSONObject().put(STATUS, "fail");
         User user = converter.convertToUser(userDto);
         if (userService.findByUsername(user.getUsername()) == null) {
