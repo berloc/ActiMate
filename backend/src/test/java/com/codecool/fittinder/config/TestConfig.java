@@ -33,7 +33,8 @@ public abstract class TestConfig  {
     protected String port = ":8080";
     protected String regUrl = "/registration";
     protected String loginUrl = "/login";
-    protected String createProfileUrl = "/u/event/create";
+    protected String createEventUrl = "/u/event/create";
+    protected String getEventsUrl = "/u/events";
 
 
     @Before
