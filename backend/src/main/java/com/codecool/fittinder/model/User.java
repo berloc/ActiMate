@@ -1,5 +1,6 @@
 package com.codecool.fittinder.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,6 +21,7 @@ public class User {
     private String username;
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm")
     private Date regDate;
 
     public User(String email, String password) {

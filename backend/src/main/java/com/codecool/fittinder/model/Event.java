@@ -1,6 +1,7 @@
 package com.codecool.fittinder.model;
 
 import com.codecool.fittinder.model.enums.Status;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,6 +24,7 @@ public class Event {
     private String name;
     private String location;
     private Integer participants;
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm")
     private Date startDate;
     @Column(columnDefinition = "TEXT")
     private String description;
