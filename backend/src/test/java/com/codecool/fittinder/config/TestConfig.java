@@ -1,5 +1,8 @@
 package com.codecool.fittinder.config;
 
+import com.codecool.fittinder.model.User;
+import com.codecool.fittinder.repository.ProfileRepository;
+import com.codecool.fittinder.repository.UserRepository;
 import com.codecool.fittinder.service.security.UserService;
 import org.junit.Before;
 import org.junit.runner.RunWith;
@@ -20,13 +23,22 @@ import static org.springframework.security.test.web.servlet.setup.SecurityMockMv
 public abstract class TestConfig  {
 
     @Resource
-    FilterChainProxy springSecurityFilterChain;
+    private FilterChainProxy springSecurityFilterChain;
 
     @Resource
-    WebApplicationContext webApplicationContext;
+    private WebApplicationContext webApplicationContext;
 
     @Autowired
     protected UserService userService;
+
+    @Autowired
+    protected ProfileRepository profileRepository;
+
+    @Autowired
+    protected UserRepository userRepository;
+
+    protected User mockUser = new User("user@user.com", "123456789");
+
 
     protected MockMvc mockMvc;
     protected String host = "http://localhost";

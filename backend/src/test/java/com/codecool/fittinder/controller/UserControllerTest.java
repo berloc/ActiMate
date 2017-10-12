@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.springframework.http.MediaType;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -59,7 +60,7 @@ public class UserControllerTest extends TestConfig {
 
     @Test
     public void UnRegisteredUserNotFound() throws Exception {
-        assertEquals(null, userService.findByUsername("user@user.com"));
+        assertNull(userService.findByUsername("user@user.com"));
     }
 
     @Test
