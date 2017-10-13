@@ -7,6 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
+@Data
 @Entity
 @AllArgsConstructor @NoArgsConstructor
 @Getter @Setter
@@ -35,5 +36,14 @@ public class Profile {
 
     public Profile(User user) {
         this.user = user;
+    }
+
+    public Profile(User user, List<Interest> interestList, String firstName, String lastName, String telephoneNumber, String location) {
+        this.user = user;
+        this.interestList = interestList;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.telephoneNumber = telephoneNumber;
+        this.location = location;
     }
 }
