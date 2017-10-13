@@ -42,14 +42,13 @@ public class UserController extends AbstractController {
             Profile profile = new Profile(user);
             profileRepository.save(profile);
             logger.info("Save profile into the {} table", profile.getClass().getSimpleName());
-//            emailService.sendMessage(user.getUsername(), "registration", template.getText());
+            emailService.sendMessage(user.getUsername(), "registration", template.getText());
             response.put(STATUS, "success");
         } else {
             logger.debug("{} is already in the db", user.getUsername());
             response.put(STATUS, "username exist");
             throw new EmailIsInTheDatabaseException();
         }
-
         return response.toString();
     }
 

@@ -28,7 +28,7 @@ public class EmailServiceImpl implements EmailService {
         helper.setTo(to);
         helper.setSubject(subject);
         emailSender.send(mimeMessage);
-        logger.info("{} username has been sent to {}", subject, to);
+        logger.info("{} email has been sent to {}", subject, to);
 
     }
 }
