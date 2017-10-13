@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 
+@CrossOrigin
 @RestController
 @RequestMapping(value = "u/profile")
 public class ProfileController extends AbstractController {
