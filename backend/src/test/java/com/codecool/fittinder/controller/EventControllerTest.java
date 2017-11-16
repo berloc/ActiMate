@@ -6,6 +6,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.test.context.support.WithMockUser;
 
 
 public class EventControllerTest extends TestConfig {
@@ -29,22 +30,8 @@ public class EventControllerTest extends TestConfig {
 
 
     @Test
+    @WithMockUser(username = "user@user.com", password = "123456789")
     public void createEventSuccessTest() throws Exception {
 
-//        registration();
-//
-//
-//        mockMvc.perform(get(host + port + prefix +  getEventsUrl)
-//                .header("Authorization", getJWTToken()))
-//                .andExpect(status().is2xxSuccessful());
-//
-//        mockMvc.perform(post(host + port + prefix + createEventUrl)
-//                .content("{\"interest\":\"eventName\"}")
-//                .contentType(MediaType.APPLICATION_JSON)
-//                .accept(MediaType.APPLICATION_JSON)
-//                .header("Authorization", getJWTToken()));
-//
-//        assertEquals(1, eventRepository.findAll().size());
-//        assertEquals("eventName", eventRepository.findAll().get(0).getName());
     }
 }

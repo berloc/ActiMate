@@ -4,6 +4,7 @@ import com.codecool.fittinder.config.TestConfig;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
@@ -76,26 +77,12 @@ public class UserControllerTest extends TestConfig {
         registration();
     }
 
-//    @Test
-//    @WithMockUser(username = "user@user.com", password = "123456789")
-//    public void UserCanAccessWithTokenTest() throws Exception {
-////        registration();
-////        System.out.println(getJWTToken());
-//////        confirm();
-//////
-////////         todo create get request to confirm the user
-////        System.out.println(userService.findByUsername("user@user.com").getConfirmed());
-////        confirmGet();
-////
-////        userService.findByUsername("user@user.com").setConfirmed(true);
-////        System.out.println(userService.findByUsername("user@user.com").getConfirmed());
-////        System.out.println(getJWTToken());
-//////
-////
-////
-//        mockMvc.perform(get(host + port + prefix + getEventsUrl)
-//                .header("Authorization", getJWTToken()))
-//                .andExpect(status().is2xxSuccessful());
-//
-//    }
+    @Test
+    @WithMockUser
+    public void UserCanAccessWithTokenTest() throws Exception {
+        mockMvc.perform(get(host + port + prefix + getEventsUrl)
+                .header("Authorization", getJWTToken()))
+                .andExpect(status().is2xxSuccessful());
+
+    }
 }
