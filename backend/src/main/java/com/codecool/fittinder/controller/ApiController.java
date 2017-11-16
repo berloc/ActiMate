@@ -22,7 +22,7 @@ public class ApiController extends AbstractController {
 
     @GetMapping(value = "/status")
     public StatusResponse status(HttpServletRequest request) {
-        logger.debug(DEBUG_LOG_MES, request.getRequestURI(), request.getMethod());
+        logger.info(DEBUG_LOG_MES, request.getRequestURI(), request.getMethod());
         return new StatusResponse("server is running");
     }
 
