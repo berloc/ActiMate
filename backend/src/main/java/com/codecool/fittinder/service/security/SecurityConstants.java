@@ -1,6 +1,6 @@
 package com.codecool.fittinder.service.security;
 
-class SecurityConstants {
+public class SecurityConstants {
 
     static final String SECRET = "SecretKeyToGenJWTs";
     static final Long EXPIRATION_TIME = 864_000_000L; // 10 days

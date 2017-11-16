@@ -4,24 +4,18 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Data
 @Entity
-@AllArgsConstructor @NoArgsConstructor
+@AllArgsConstructor
 @Getter @Setter
 public class Profile {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+
     private Integer id;
-
-    @OneToOne
-    @JoinColumn(name = "user_id", unique = true)
-    @NotNull
-    private User user;
-
     @JsonIgnore
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "profile_interest",
@@ -29,17 +23,23 @@ public class Profile {
             inverseJoinColumns = @JoinColumn(name = "interest_id", referencedColumnName = "id"),
             uniqueConstraints = @UniqueConstraint(columnNames = {"profile_id", "interest_id"}))
     private List<Interest>interestList;
+
     private String firstName;
+
     private String lastName;
+
     private String telephoneNumber;
+
     private String location;
 
-    public Profile(User user) {
-        this.user = user;
+    private Boolean subscribed;
+
+
+    public Profile() {
+        this.subscribed = true;
     }
 
-    public Profile(User user, List<Interest> interestList, String firstName, String lastName, String telephoneNumber, String location) {
-        this.user = user;
+    public Profile(List<Interest> interestList, String firstName, String lastName, String telephoneNumber, String location) {
         this.interestList = interestList;
         this.firstName = firstName;
         this.lastName = lastName;

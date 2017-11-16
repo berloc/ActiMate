@@ -18,9 +18,11 @@ public class Interest {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @JsonIgnore
     private Integer id;
+
     private String name;
+
     @JsonIgnore
-    @ManyToMany(mappedBy = "interestList")
+    @ManyToMany(mappedBy = "interestList",  cascade=CascadeType.ALL)
     private List<Profile>profileList;
 
 

@@ -2,7 +2,6 @@ package com.codecool.fittinder.model.dto;
 
 import com.codecool.fittinder.model.Interest;
 import com.codecool.fittinder.model.User;
-import com.codecool.fittinder.model.enums.Status;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,6 +19,5 @@ public class EventDto {
     private Date startDate;
     private String description;
     private Interest interest;
-    private Status status;
 
 }
